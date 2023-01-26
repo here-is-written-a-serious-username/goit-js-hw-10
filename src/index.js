@@ -6,7 +6,7 @@ import { fetchCountries } from './fetchCountries';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 Notify.init({
-    timeout: 9000,
+    timeout: 3000,
     position: 'center-top',
 });
 
