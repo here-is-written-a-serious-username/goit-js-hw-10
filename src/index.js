@@ -30,20 +30,24 @@ function takeInputValue(e) {
         console.log(arrOfCountries);
 
         if (arrOfCountries.length > 10) {
+            clearMarkup();
             Notify.info('Too many matches found. Please enter a more specific name.');
             return;
         };
 
         if (arrOfCountries.length === 1) {
-            ulEl.innerHTML='';
+            clearMarkup();
             divEl.innerHTML = createSingleMarkup(arrOfCountries);
             return;
         };
 
-        divEl.innerHTML = '';
+        clearMarkup();
         ulEl.innerHTML = createlistMarkup(arrOfCountries);
 
-    }).catch(() => Notify.failure('Oops, there is no country with that name.'));;
+    }).catch(() => {
+        clearMarkup();
+        Notify.failure('Oops, there is no country with that name.');
+    });
 
 };
 
@@ -61,6 +65,30 @@ function createSingleMarkup(arrOfCountries) {
     };
 };
 
-function createlistMarkup (arrOfCountries) {
-    return arrOfCountries.map(({ name, flags }) => { return `<li><img src="${flags.svg}" alt="${name.official}" width="60">${name.official}</li>`}).join('');
+function createlistMarkup(arrOfCountries) {
+    return arrOfCountries.map(({ name, flags }) => { return `<li><img src="${flags.svg}" alt="${name.official}" width="60">${name.official}</li>` }).join('');
+};
+
+// function clearMarkup() {
+//     if (ulEl.firstElementChild || divEl.firstElementChild) {
+//         ulEl.innerHTML = '';
+//         divEl.innerHTML = '';
+//     }  
+// };
+
+// function clearMarkup() {
+//     if (ulEl.firstElementChild) {
+//         ulEl.innerHTML = '';
+//     } else if (divEl.firstElementChild) {
+//         divEl.innerHTML = '';
+//     }
+// };
+
+function clearMarkup() {
+    if (ulEl.firstElementChild) {
+        ulEl.innerHTML = '';
+    }
+    if (divEl.firstElementChild) {
+        divEl.innerHTML = '';
+    }
 };
